@@ -17,11 +17,11 @@ jobs:
   
     strategy:
       matrix:
-        secret_names: ${{ inputs }}
+        secret_name: ["TEST_SECRET", "ANOTHER_SECRET"]
 
     steps:
       - run: gh secrets list
-        if: ${{ inputs.TEST_SECRET != '' }}
+        if: ${{ inputs[matrix.secret_name] != '' }}
         env:
-          SECRET_NAME: TEST_SECRET
-          SECRET_VALUE: ${{ inputs.TEST_SECRET }}
+          SECRET_NAME: matrix.secret_name
+          SECRET_VALUE: ${{ inputs[matrix.secret_name] }}
