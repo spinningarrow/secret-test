@@ -20,7 +20,7 @@ jobs:
         secret_name: ["TEST_SECRET", "ANOTHER_SECRET"]
 
     steps:
-      - run: gh secrets list
+      - run: echo $SECRET_NAME is $SECRET_VALUE
         if: ${{ inputs[matrix.secret_name] != '' }}
         env:
           SECRET_NAME: matrix.secret_name
