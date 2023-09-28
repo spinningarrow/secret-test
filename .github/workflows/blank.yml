@@ -1,6 +1,4 @@
-# This is a basic workflow to help you get started with Actions
-
-name: CI
+name: Secrets
 
 on:
   workflow_dispatch:
@@ -19,7 +17,7 @@ jobs:
   
     strategy:
       matrix:
-        secret_names: ["test", "another"]
+        secret_names: ${{ inputs }}
 
     steps:
       - run: gh secrets list
