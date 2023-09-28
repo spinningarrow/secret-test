@@ -13,7 +13,6 @@ on:
         type: string
         description: ANOTHER_SECRET
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   update-secrets:
     runs-on: ubuntu-latest
@@ -24,6 +23,7 @@ jobs:
 
     steps:
       - run: gh secrets list
+        if: ${{ inputs.TEST_SECRET != '' }}
         env:
           SECRET_NAME: TEST_SECRET
           SECRET_VALUE: ${{ inputs.TEST_SECRET }}
