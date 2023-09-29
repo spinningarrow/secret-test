@@ -29,9 +29,9 @@ jobs:
             test "null" != $(jq -r ".inputs.$i" $GITHUB_EVENT_PATH) && names_to_update+=($i)
           done
           echo ${names_to_update[@]}
-          #echo matrix=$(jq -c -n '$ARGS.positional' --args "${names_to_update[@]}") >> $GITHUB_OUTPUT
+          echo matrix=$(jq -c -n '$ARGS.positional' --args "${names_to_update[@]}") >> $GITHUB_OUTPUT
           #echo $GITHUB_OUTPUT
-          echo matrix=["TEST_SECRET"] >> $GITHUB_OUTPUT
+          #echo matrix=["TEST_SECRET"] >> $GITHUB_OUTPUT
 
   update-secrets:
     needs: getsecrets
