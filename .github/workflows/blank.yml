@@ -36,7 +36,7 @@ jobs:
   
     strategy:
       matrix:
-        secret_name: ["TEST_SECRET", "ANOTHER_SECRET"]
+        secret_name: ${{ fromJson(needs.get-secrets-to-update.outputs.matrix) }}
 
     steps:
       - run: echo $SECRET_NAME is $SECRET_VALUE
