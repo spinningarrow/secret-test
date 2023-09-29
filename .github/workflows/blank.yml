@@ -12,6 +12,18 @@ on:
         description: ANOTHER_SECRET
 
 jobs:
+  get-secrets-to-update:
+    runs-on: ubuntu-latest
+
+    outputs:
+      matrix: ${{ steps.set_matrix.outputs.matrix }}
+
+    steps:
+      - name: Set matrix
+        id: set_matrix
+        run: |
+          echo "matrix=[\"TEST_SECRET\"]" >> $GITHUB_OUTPUT
+
   update-secrets:
     runs-on: ubuntu-latest
   
