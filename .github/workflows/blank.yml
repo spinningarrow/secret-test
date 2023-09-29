@@ -34,6 +34,7 @@ jobs:
           echo matrix=["TEST_SECRET"] >> $GITHUB_OUTPUT
 
   update-secrets:
+    needs: [get-secrets-to-update]
     runs-on: ubuntu-latest
   
     strategy:
