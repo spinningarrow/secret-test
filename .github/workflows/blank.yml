@@ -22,12 +22,15 @@ jobs:
       - name: Set matrix
         id: set_matrix
         run: |
-          echo "matrix=[\"TEST_SECRET\"]" >> $GITHUB_OUTPUT
+          names=("TEST_SECRET" "ANOTHER_SECRET")
+          names_to_update=()
+          for i in ${names[@]}; do
+            test -n $(jq -r '.inputs.$i' $GITHUB_EVENT_PATH) && names_to_update+=($i)
+          done
+          echo $names_to_update
 
   update-secrets:
     runs-on: ubuntu-latest
-
-    if: ${{ inputs[matrix.secret_name] != '' }}
   
     strategy:
       matrix:
