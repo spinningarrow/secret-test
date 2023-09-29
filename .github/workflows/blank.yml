@@ -25,6 +25,7 @@ jobs:
           names=("TEST_SECRET" "ANOTHER_SECRET")
           names_to_update=()
           for i in ${names[@]}; do
+            echo $(jq -r ".inputs.$i" $GITHUB_EVENT_PATH)
             test -n $(jq -r ".inputs.$i" $GITHUB_EVENT_PATH) && names_to_update+=($i)
           done
           echo ${names_to_update[@]}
