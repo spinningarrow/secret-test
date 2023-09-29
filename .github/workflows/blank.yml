@@ -12,7 +12,7 @@ on:
         description: ANOTHER_SECRET
 
 jobs:
-  get-secrets-to-update:
+  getsecrets:
     runs-on: ubuntu-latest
 
     outputs:
@@ -34,12 +34,12 @@ jobs:
           echo matrix=["TEST_SECRET"] >> $GITHUB_OUTPUT
 
   update-secrets:
-    needs: [get-secrets-to-update]
+    needs: getsecrets
     runs-on: ubuntu-latest
   
     strategy:
       matrix:
-        secret_name: ${{ fromJson(needs.get-secrets-to-update.outputs.matrix) }}
+        secret_name: ${{ fromJson(needs.getsecrets.outputs.matrix) }}
 
     steps:
       - run: echo $SECRET_NAME is $SECRET_VALUE
