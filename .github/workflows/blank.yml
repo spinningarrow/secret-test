@@ -26,6 +26,8 @@ jobs:
 
   update-secrets:
     runs-on: ubuntu-latest
+
+    if: ${{ inputs[matrix.secret_name] != '' }}
   
     strategy:
       matrix:
